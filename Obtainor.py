@@ -1,13 +1,12 @@
-
+# -*- coding: utf-8 -*-
+#训练用的txt文档中，如果句子前有'*'标识，表示为人为的摘要标签
+#
 import sys,os
 import re
 import collections
 from pyltp import Segmentor
 from tfidf import Kwdsextractor
-#import sys,os,re,collections
 
-# -*- coding: utf-8 -*-
-#训练用的txt文档中，如果句子前有'*'标识，表示为人为的摘要标签
 
 class Trainer():
 		def __init__(self):
@@ -429,12 +428,12 @@ class Parser(Trainer):
 				self.features[pos]['length'] = temp[1]
 				self.features[pos]['posrel'] = self.judgePosOfSent(textname,i,j)
 				self.features[pos]['titrel'] = self.jugdeRelOfTiWords(self.text[textname][i][j],titleWords)
-				if temp[0] > tempcscmax:				#获取最大得分
+				if temp[0] > tempcscmax:						#获取最大得分
 					tempcscmax = temp[0]
 				if self.features[pos]['length'] != 0:
-					if temp[1] > templenmax:				#获取最大句长
+					if temp[1] > templenmax:					#获取最大句长
 						templenmax = temp[1]
-					if temp[1] < templenmin:				#获取最小句长
+					if temp[1] < templenmin:					#获取最小句长
 						templenmin = temp[1]
 					count += 1
 
@@ -472,7 +471,7 @@ class Parser(Trainer):
 		else:
 			return False
 
-	def outputFile(self,textname,string):								#输出txt文件
+	def outputFile(self,textname,string):						#输出txt文件
 		file = "testsets"
 		filename = textname + '-abstract.txt'
 		filepath = os.path.join(self.rootpath,file)
@@ -481,6 +480,4 @@ class Parser(Trainer):
 		f.write('    ')
 		f.write(string)
 		f.close()
-
-
 

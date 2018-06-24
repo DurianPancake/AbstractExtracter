@@ -8,7 +8,7 @@ import collections
 
 class Kwdsextractor():
     def __init__(self):
-        self.text = {}              #text 的理想数据类型是 已经分好词的词列表的字典
+        self.text = {}                      #text 的理想数据类型是 已经分好词的词列表的字典
         self.stopwords = set(['，','。','的','“',"”","！","？"])      #停用词
         self.wordsets = set()               #所有词的集合
 
@@ -31,14 +31,14 @@ class Kwdsextractor():
                     count += 1
             self.idfmap[word] = abs(math.log(self.D/(count+1)))
             
-    def tfidf(self):    #计算tf-idf值并存储到哈希表
+    def tfidf(self):                                        #计算tf-idf值并存储到哈希表
         self.idf()
         for tname in self.text.keys():
             self.tf(tname)
             for word in self.wordsets.intersection(set(self.text[tname])):
                 self.tfidfmap[tname][word] = self.tfmap[tname][word] * self.idfmap[word]
 
-    def load(self,value):     #demo
+    def load(self,value):                                   
         self.text = value
         self.D = len(self.text)
         self.tfidf()                                        #计算公式
